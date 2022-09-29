@@ -8,11 +8,10 @@ public class Crypt {
         String key = null;
 
         try {
-            File myObj = new File("src/message.txt");
+            File myObj = new File("src/data.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 data = myReader.nextLine();
-                System.out.println(data);
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -25,13 +24,18 @@ public class Crypt {
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 key = myReader.nextLine();
-                System.out.println(key);
             }
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+
+        String Data = data;
+        for (int i = 0; i < Data.length(); i++) {
+            i = i ^ key;
+        }
+
 
     }
 }
