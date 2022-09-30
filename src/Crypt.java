@@ -12,7 +12,6 @@ public class Crypt {
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 data = myReader.nextLine();
-                System.out.println(data);
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -25,7 +24,6 @@ public class Crypt {
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 key = myReader.nextLine();
-                System.out.println(key);
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -33,5 +31,25 @@ public class Crypt {
             e.printStackTrace();
         }
 
+        String str1 = data;
+        char[] ch1 = str1.toCharArray();
+        for (char c : ch1) {
+            System.out.println(c);
+            char d = c;
+            String s=String.valueOf(d);
+            int z = Integer.parseInt(s,2);
+            int teck = c;
+            int key2 = '¤';
+            String binarykey = Integer.toBinaryString(key2);
+            String binaryteck = Integer.toBinaryString(teck);
+            int Intinaryteck = Integer.parseInt(binaryteck, 2);
+            int intbinarykey = Integer.parseInt(binarykey, 2);
+            int xorteck = Intinaryteck ^ intbinarykey;
+            int decoder = xorteck ^ intbinarykey;
+            int yourInt = decoder;
+            char ch = (char) yourInt;
+            System.out.println(yourInt);
+            System.out.println(ch);
+        }
     }
 }
