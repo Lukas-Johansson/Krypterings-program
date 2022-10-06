@@ -1,12 +1,11 @@
-import java.io.File;  // Import the File class
-import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.util.Scanner; // Import the Scanner class to read text files
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Crypt {
     public static void main(String[] args) {
         String data = null;
         String key = null;
-
         try {
             File myObj = new File("src/message.txt");
             Scanner myReader = new Scanner(myObj);
@@ -18,7 +17,6 @@ public class Crypt {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-
         try {
             File myObj = new File("src/key.txt");
             Scanner myReader = new Scanner(myObj);
@@ -30,26 +28,32 @@ public class Crypt {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-
-        String str1 = data;
-        char[] ch1 = str1.toCharArray();
-        for (char c : ch1) {
-            System.out.println(c);
-            char d = c;
-            String s=String.valueOf(d);
-            int z = Integer.parseInt(s,2);
-            int teck = c;
-            int key2 = '¤';
-            String binarykey = Integer.toBinaryString(key2);
-            String binaryteck = Integer.toBinaryString(teck);
-            int Intinaryteck = Integer.parseInt(binaryteck, 2);
-            int intbinarykey = Integer.parseInt(binarykey, 2);
-            int xorteck = Intinaryteck ^ intbinarykey;
-            int decoder = xorteck ^ intbinarykey;
-            int yourInt = decoder;
-            char ch = (char) yourInt;
-            System.out.println(yourInt);
-            System.out.println(ch);
-        }
+        String m = data;
+        String k = key;
+        Crypt cryptModel = new Crypt();
+        System.out.println(cryptModel.cryptString(m,k));
+        String x = (cryptModel.cryptString(m,k));
+        System.out.println(cryptModel.cryptString(x,k));
     }
+
+    public String cryptString(String message, String key) {
+        String result = "";
+        while (key.length() < message.length()) {
+            key = expandKey(key);
+        }
+
+        for (int i = 0 ; i < message.length() ; i++) {
+            result += (char)crypt(message.charAt(i), key.charAt(i));
+        }
+        return result;
+    }
+
+    private String expandKey(String key) {
+        return  key+key;
+    }
+
+    public int crypt(int m, int k) {
+        return m ^ k;
+    }
+
 }
