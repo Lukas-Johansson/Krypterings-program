@@ -1,15 +1,12 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Crypt2 {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Vad vill du kryptera?");
-        String word = input.nextLine();
-        Scanner test = new Scanner(System.in);
-        String key = test.nextLine();
-        System.out.println("Vad skall din key vara?");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Message");
+        String word  = sc.nextLine();
+        System.out.println("Enter Key");
+        String key = sc.nextLine();
         String m = word;
         String k = key;
         Crypt2 cryptModel = new Crypt2();
