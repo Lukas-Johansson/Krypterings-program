@@ -34,7 +34,7 @@ public class Model {
 
     public void FileReader() {
         try {
-            File myObj = new File("src/message");
+            File myObj = new File("src/message.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 message = myReader.nextLine();
