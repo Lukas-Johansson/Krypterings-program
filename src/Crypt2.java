@@ -1,18 +1,62 @@
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Crypt2 {
+public class Crypt2{
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Message");
-        String word  = sc.nextLine();
-        System.out.println("Enter Key");
-        String key = sc.nextLine();
-        String m = word;
+        String data = null;
+        String key = null;
+        try {
+            File myObj = new File("src/message.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                data = myReader.nextLine();
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        try {
+            File myObj = new File("src/key.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                key = myReader.nextLine();
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        String m = data;
         String k = key;
         Crypt2 cryptModel = new Crypt2();
-        System.out.println(cryptModel.cryptString(m,k));
-        String x = (cryptModel.cryptString(m,k));
-        System.out.println(cryptModel.cryptString(x,k));
+        String Encrypt = (cryptModel.cryptString(m,k));
+        System.out.println(Encrypt);
+        String Decrypt = (cryptModel.cryptString(Encrypt,k));
+        System.out.println(Decrypt);
+        try {
+            File myObj = new File("filename.txt");
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        try {
+            FileWriter myWriter = new FileWriter("filename.txt");
+            myWriter.write(cryptModel.cryptString(m,k));
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     public String cryptString(String message, String key) {
@@ -34,5 +78,4 @@ public class Crypt2 {
     public int crypt(int m, int k) {
         return m ^ k;
     }
-
 }
