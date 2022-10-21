@@ -9,6 +9,13 @@ public class Model {
     private String key;
     private String crypt;
 
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     public String getCrypt() {
         return crypt;
     }
@@ -52,23 +59,6 @@ public class Model {
             }
             myReader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args) {
-        Model cryptModel = new Model();
-        cryptModel.FileReader();
-        cryptModel.cryptString();
-        System.out.println(cryptModel.getCrypt());
-
-        try {
-            FileWriter myWriter = new FileWriter("filename.txt");
-            myWriter.write(cryptModel.getCrypt());
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
